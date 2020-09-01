@@ -29,6 +29,8 @@ class Heap{  // no brackets after class name
         T extractMin();
         void removeMin();
         void buildHeap();
+        void insert(T);
+        std::ostream& print(std::ostream&);
 
     private: 
         // Naming convention of private members
@@ -37,7 +39,29 @@ class Heap{  // no brackets after class name
         int capacity_;
         std::vector<T> container_;
 
+        int _getLastIdx();
+        void _heapifyUp(int);
+        void _swap(int, int);
+        static int _getParentIdx(const int idx){
+            /* 1 : 2, 3
+            2: 4, 5
+            3: 6, 7
+            parent = idx/2
+
+            zero indexed : (idx+1)/2 -1 = (idx-1)/2
+            */
+            return (idx-1)/2;
+            }
+
 
 }; // notice the ; after class definition 
+
+//template <typename T>
+//std::ostream& operator<<(std::ostream&, const Heap<T>&);
+
+// for template class, declarations are not enough. 
+// Function implementations need to be included 
+// the implementations will be compiled within the client cpp file. No compilation is done to the hpp files.
+
 #include "Heap.hpp"
 #endif

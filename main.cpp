@@ -24,10 +24,19 @@
  * using adj_list_map = std::unordered_map<std::string, neighbor_vector>;
  * alternative type definition: typedef std::unordered_map<int, neigbbor_vector> adj_list_map;
 */
-
+void test_Heap(){
+    // Heap test 
+    Heap<int> myHeap1;
+    std::vector<int> vect(5,100);
+    std::cout<< "address of vect = " << &vect << std::endl;
+    Heap<int> myHeap2(vect);
+    myHeap2.insert(15);
+    myHeap2.print(std::cout);
+    std::cout << std::endl;
+    return;
+}
 int main(){
-    // Heap test
-    Heap<int> myHeap;
+    test_Heap();
     // list initialization
     adj_list_map adj_list({
         {"s", neighbor_vector{{"v", 1}, {"w",5}}},
