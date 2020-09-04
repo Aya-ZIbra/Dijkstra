@@ -41,7 +41,12 @@ class Heap{  // no brackets after class name
 
         int _getLastIdx();
         void _heapifyUp(int);
+        void _heapifyDn(int);
         void _swap(int, int);
+        bool _isLeaf(const int);
+        int _getLeftChildIdx(const int idx);
+        int _getRightChildIdx(const int idx);
+
         static int _getParentIdx(const int idx){
             /* 1 : 2, 3
             2: 4, 5

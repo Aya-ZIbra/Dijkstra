@@ -26,6 +26,79 @@ T Heap<T>::extractMin(){
     return container_[0];
 }
 
+template <class T>
+void Heap<T>::removeMin(){
+    swap(0, _getLastIdx());
+    _heapifyDn(0);
+}
+
+template<class T>
+void Heap<T>::buildHeap(){
+    int idx = _getLastIdx();
+    while (idx >= 0){
+        _heapifyDn(idx);
+        idx--;
+    }
+
+}
+
+
+template<class T>
+void Heap<T>::_heapifyDn(int i){
+    std::cout << "[heapifyDn] node " << i << std::endl; 
+    int idxL, idxR, idxMinChild;
+    while(!_isLeaf(i)){
+        idxL = _getLeftChildIdx(i);
+        idxR = _getRightChildIdx(i);
+        // since this is not leaf, there is at least a left child
+        // if no right child
+        if (idxR == -1)  {
+            idxMinChild = idxL;
+        }
+        else if (container_[idxL]< container_[idxR]) { idxMinChild = idxL;}
+        else { idxMinChild = idxR;}
+        
+        if (container_[i] > container_[idxMinChild]) {
+            _swap(idxMinChild, i);
+            i = idxMinChild;
+        }else{
+            return; //break ??
+        }
+        
+    }
+}
+
+template <typename T>
+bool Heap<T>::_isLeaf(const int i){
+    if (_getLeftChildIdx(i) == -1 && _getRightChildIdx(i) == -1){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+template <typename T>  // or template <class T> ???????
+int Heap<T>::_getLeftChildIdx(const int idx){
+    //(idx+1)*2-1 = idx*2 +1
+    int childIdx = idx*2+1;
+    if (childIdx <= _getLastIdx()){
+        return childIdx;
+    }
+    else { 
+        return -1;
+    }
+}
+
+template <typename T>
+int Heap<T>::_getRightChildIdx(const int idx){
+    int childIdx = idx*2 + 2;
+    if (childIdx <= _getLastIdx()){
+        return childIdx;
+    }
+    else { 
+        return -1;
+    }
+}
 template<class T>
 void Heap<T>::insert(T item){
     // add item to end of vector
@@ -64,7 +137,7 @@ int Heap<T>::_getLastIdx(){
 template <typename T>
 std::ostream& Heap<T>::print(std::ostream& os){
     for(T item: container_){
-        os << item << ", " ;
+        os << item << " " ;
     }
     return os;
 }

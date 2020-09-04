@@ -27,9 +27,12 @@
 void test_Heap(){
     // Heap test 
     Heap<int> myHeap1;
-    std::vector<int> vect(5,100);
+    std::vector<int> vect{ 8, 10,16 ,20, 45}; //(5,100);
     std::cout<< "address of vect = " << &vect << std::endl;
     Heap<int> myHeap2(vect);
+    myHeap2.buildHeap();
+    myHeap2.print(std::cout);
+    std::cout<< std::endl;
     myHeap2.insert(15);
     myHeap2.print(std::cout);
     std::cout << std::endl;
